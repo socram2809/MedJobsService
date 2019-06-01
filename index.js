@@ -1,9 +1,12 @@
 var express = require('express')
 var bodyParser = require('body-parser');
 var app = express();
+const path = require('path')
 const PORT = process.env.PORT || 8080
 
 app.use(bodyParser.json())
+
+app.use(express.static(path.join(__dirname, 'public')))
 
 app.get('/', function(req, res){
    res.send("Webservice");
