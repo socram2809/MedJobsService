@@ -1,10 +1,20 @@
-const express = require('express')
-const path = require('path')
-const PORT = process.env.PORT || 5000
+var express = require('express')
+var bodyParser = require('body-parser');
+var app = express();
 
-express()
-  .use(express.static(path.join(__dirname, 'public')))
-  .set('views', path.join(__dirname, 'views'))
-  .set('view engine', 'ejs')
-  .get('/', (req, res) => res.render('pages/index'))
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+app.use(bodyParser.json())
+
+app.get('/', function(req, res){
+   res.send("Webservice");
+});
+
+app.post('/', function(req, res) {
+    console.log(req.body)
+    res.send(req.body)
+})
+
+app.get('*', function(req, res){
+   res.send('Desculpa, essa não é uma URL válida.');
+});
+
+app.listen(8080, () => console.log("Servidor ouvindo na porta 8080!"))
