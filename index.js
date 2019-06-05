@@ -21,7 +21,7 @@ var usuarios = require('./Usuarios.js');
 /**
  * Definição dos routers
  */
-app.use('/usuarios', usuarios);
+app.use('/usuario', usuarios);
 
 app.get('*', function(req, res){
    res.send('Desculpa, essa não é uma URL válida.');
