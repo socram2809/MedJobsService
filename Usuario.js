@@ -13,8 +13,12 @@ router.get('/', function(req, res){
 
 //Salva/Edita usuário
 router.post('/', function(req, res){
-    usuariosRef.push(req.body)
-    res.send(JSON.stringify(response))
+    console.log(req.body)
+    let usuario = {
+        nome: req.body.nome,
+        tipo: req.body.tipo
+    }
+    res.send(usuariosRef.child(req.body.uid).set(usuario))
 })
 
 //Exporta o router para uso em index.js
