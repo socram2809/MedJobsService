@@ -6,7 +6,18 @@ var bodyParser = require('body-parser')
 var app = express();
 const path = require('path')
 const PORT = process.env.PORT || 8080
+
+/**
+ * Permissões de acesso ao servidor
+ */
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PATCH, DELETE, OPTIONS');
+    next();
+});
 
 /**
  * Define a pasta pública do Webservice
