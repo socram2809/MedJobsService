@@ -27,15 +27,17 @@ app.use(express.static(path.join(__dirname, 'public')))
 /**
  * Importa os routers
  */
-var usuarios = require('./Usuario.js');
+var usuario = require('./Usuario.js');
+var oportunidade = require('./Oportunidade.js');
 
 /**
  * Definição dos routers
  */
-app.use('/usuario', usuarios);
+app.use('/usuario', usuario);
+app.use('/oportunidade', oportunidade);
 
 app.get('*', function(req, res){
    res.send('Desculpa, essa não é uma URL válida.');
 })
 
-app.listen(PORT, () => console.log(`Servidor ouvindo na porta ${ PORT }!`))
+app.listen(PORT, () => console.log(`Servidor ouvindo na porta ${ PORT }!`));
