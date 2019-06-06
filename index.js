@@ -16,7 +16,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 /**
  * Importa os routers
  */
-var usuarios = require('./Usuarios.js');
+var usuarios = require('./Usuario.js');
 
 /**
  * Definição dos routers

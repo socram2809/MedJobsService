@@ -2,7 +2,7 @@ var express = require('express')
 var router = express.Router()
 var firebase = require('./Firebase.js')
 const database = firebase.database()
-const usuariosRef = database.ref('/usuarios')
+const usuariosRef = database.ref('/usuario')
 
 //Retorna os usuários
 router.get('/', function(req, res){
