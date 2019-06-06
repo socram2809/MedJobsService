@@ -13,7 +13,6 @@ router.get('/', function(req, res){
 
 //Salva/Edita usuário
 router.post('/', function(req, res){
-    console.log(req.body)
     let usuario = {
         nome: req.body.nome,
         tipo: req.body.tipo
