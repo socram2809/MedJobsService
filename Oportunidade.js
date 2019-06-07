@@ -43,6 +43,21 @@ router.get('/busca/:busca', function(req, res){
     })
 })
 
+//Retorna uma oportunidade
+router.get('/:id', function(req, res){
+    var id = req.params.id;
+    usuariosRef.orderByKey().equalTo(id).on('value', function(snapshot){
+        var resultados = snapshot.val();
+        var oportunidade = null;
+        var keys = Object.keys(resultados)
+        keys.forEach((key) => {
+            oportunidade = resultados[key];
+            oportunidade.id = key;
+        })
+        res.send(JSON.stringify(oportunidade))  
+    })
+})
+
 //Salva/Edita oportunidade
 router.post('/', function(req, res){
     res.send(usuariosRef.push(req.body))
