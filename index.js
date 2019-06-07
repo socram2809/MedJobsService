@@ -29,15 +29,20 @@ app.use(express.static(path.join(__dirname, 'public')))
  */
 var usuario = require('./Usuario.js');
 var oportunidade = require('./Oportunidade.js');
+var candidaduta = require('./Candidatura.js');
 
 /**
  * Definição dos routers
  */
 app.use('/usuario', usuario);
 app.use('/oportunidade', oportunidade);
+app.use('/candidatura',candidaduta);
 
 app.get('*', function(req, res){
    res.send('Desculpa, essa não é uma URL válida.');
 })
 
+/**
+ * Mostra a porta que o servidor está ouvindo
+ */
 app.listen(PORT, () => console.log(`Servidor ouvindo na porta ${ PORT }!`));
