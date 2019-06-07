@@ -7,7 +7,15 @@ const usuariosRef = database.ref('/oportunidade')
 //Retorna todas as oportunidades
 router.get('/', function(req, res){
     usuariosRef.on('value', function(snapshot){
-        res.send(JSON.stringify(snapshot.val()))  
+        var resultados = snapshot.val();
+        var valores = [];
+        var keys = Object.keys(resultados)
+        keys.forEach((key) => {
+            var oportunidade = resultados[key];
+            oportunidade.id = key;
+            valores.push(oportunidade);
+        })
+        res.send(JSON.stringify(valores))  
     })
 })
 
@@ -20,7 +28,9 @@ router.get('/busca/:busca', function(req, res){
         var filtrado = [];
         var keys = Object.keys(resultados)
         keys.forEach((key) => {
-            valores.push(resultados[key]);
+            var oportunidade = resultados[key];
+            oportunidade.id = key;
+            valores.push(oportunidade);
         })
         filtrado = valores.filter((oportunidade) => {
             return oportunidade.cidade.toUpperCase().includes(busca) 
