@@ -2,11 +2,11 @@ var express = require('express')
 var router = express.Router()
 var firebase = require('./Firebase.js')
 const database = firebase.database()
-const usuariosRef = database.ref('/oportunidade')
+const oportunidadeRef = database.ref('/oportunidade')
 
 //Retorna todas as oportunidades
 router.get('/', function(req, res){
-    usuariosRef.on('value', function(snapshot){
+    oportunidadeRef.on('value', function(snapshot){
         var resultados = snapshot.val();
         var valores = [];
         var keys = Object.keys(resultados)
@@ -22,7 +22,7 @@ router.get('/', function(req, res){
 //Retorna oportunidades específicas
 router.get('/busca/:busca', function(req, res){
     var busca = req.params.busca.toUpperCase();
-    usuariosRef.on('value', function(snapshot){
+    oportunidadeRef.on('value', function(snapshot){
         var resultados = snapshot.val();
         var valores = [];
         var filtrado = [];
@@ -46,7 +46,7 @@ router.get('/busca/:busca', function(req, res){
 //Retorna uma oportunidade
 router.get('/:id', function(req, res){
     var id = req.params.id;
-    usuariosRef.orderByKey().equalTo(id).on('value', function(snapshot){
+    oportunidadeRef.orderByKey().equalTo(id).on('value', function(snapshot){
         var resultados = snapshot.val()
         var oportunidade = null
         var keys = Object.keys(resultados)
@@ -60,7 +60,7 @@ router.get('/:id', function(req, res){
 
 //Salva/Edita oportunidade
 router.post('/', function(req, res){
-    res.send(usuariosRef.push(req.body))
+    res.send(oportunidadeRef.push(req.body))
 })
 
 //Exporta o router para uso em index.js

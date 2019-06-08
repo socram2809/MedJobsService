@@ -2,11 +2,11 @@ var express = require('express')
 var router = express.Router()
 var firebase = require('./Firebase.js')
 const database = firebase.database()
-const usuariosRef = database.ref('/candidatura')
+const candidaturaRef = database.ref('/candidatura')
 
 //Retorna todas as candidaturas
 router.get('/', function(req, res){
-    usuariosRef.on('value', function(snapshot){
+    candidaturaRef.on('value', function(snapshot){
         res.send(JSON.stringify(snapshot.val()))  
     })
 })
@@ -14,7 +14,7 @@ router.get('/', function(req, res){
 //Retorna candidaturas de um médico
 router.get('/medico/:medico', function(req, res){
     var medico = req.params.medico;
-    usuariosRef.orderByChild('medico').equalTo(medico).on('value', function(snapshot){
+    candidaturaRef.orderByChild('medico').equalTo(medico).on('value', function(snapshot){
         var resultados = snapshot.val();
         var valores = [];
         var keys = Object.keys(resultados)
@@ -29,7 +29,14 @@ router.get('/medico/:medico', function(req, res){
 
 //Salva/Edita candidatura
 router.post('/', function(req, res){
-    res.send(usuariosRef.push(req.body))
+    res.send(candidaturaRef.push(req.body))
+})
+
+//Remove candidatura
+router.delete('/:id', function(req, res){
+    var candidatura = req.params.id
+    var deletarCandidaturaRef = database.ref('/candidatura/' + candidatura)
+    res.send(deletarCandidaturaRef.remove())
 })
 
 //Exporta o router para uso em index.js
