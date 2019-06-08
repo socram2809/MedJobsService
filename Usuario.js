@@ -17,7 +17,7 @@ router.post('/', function(req, res){
         nome: req.body.nome,
         tipo: req.body.tipo
     }
-    res.send(usuariosRef.child(req.body.uid).set(usuario))
+    usuariosRef.child(req.body.uid).set(usuario)
 })
 
 //Exporta o router para uso em index.js

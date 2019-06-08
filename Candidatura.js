@@ -31,14 +31,14 @@ router.get('/medico/:medico', function(req, res){
 
 //Salva/Edita candidatura
 router.post('/', function(req, res){
-    res.send(candidaturaRef.push(req.body))
+    candidaturaRef.push(req.body)
 })
 
 //Remove candidatura
 router.delete('/:id', function(req, res){
     var candidatura = req.params.id
     var deletarCandidaturaRef = database.ref('/candidatura/' + candidatura)
-    res.send(deletarCandidaturaRef.remove())
+    deletarCandidaturaRef.remove()
 })
 
 //Exporta o router para uso em index.js
