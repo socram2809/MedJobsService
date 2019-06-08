@@ -9,12 +9,14 @@ router.get('/', function(req, res){
     oportunidadeRef.on('value', function(snapshot){
         var resultados = snapshot.val();
         var valores = [];
-        var keys = Object.keys(resultados)
-        keys.forEach((key) => {
-            var oportunidade = resultados[key];
-            oportunidade.id = key;
-            valores.push(oportunidade);
-        })
+        if(resultados){
+            var keys = Object.keys(resultados)
+            keys.forEach((key) => {
+                var oportunidade = resultados[key];
+                oportunidade.id = key;
+                valores.push(oportunidade);
+            })
+        }
         res.send(JSON.stringify(valores))  
     })
 })
@@ -26,19 +28,21 @@ router.get('/busca/:busca', function(req, res){
         var resultados = snapshot.val();
         var valores = [];
         var filtrado = [];
-        var keys = Object.keys(resultados)
-        keys.forEach((key) => {
-            var oportunidade = resultados[key];
-            oportunidade.id = key;
-            valores.push(oportunidade);
-        })
-        filtrado = valores.filter((oportunidade) => {
-            return oportunidade.cidade.toUpperCase().includes(busca) 
-                    || oportunidade.titulo.toUpperCase().includes(busca)
-                    || oportunidade.estado.toUpperCase().includes(busca) 
-                    || oportunidade.unidade.toUpperCase().includes(busca)
-                    || oportunidade.descricao.toUpperCase().includes(busca);
-        })
+        if(resultados){
+            var keys = Object.keys(resultados)
+            keys.forEach((key) => {
+                var oportunidade = resultados[key];
+                oportunidade.id = key;
+                valores.push(oportunidade);
+            })
+            filtrado = valores.filter((oportunidade) => {
+                return oportunidade.cidade.toUpperCase().includes(busca) 
+                        || oportunidade.titulo.toUpperCase().includes(busca)
+                        || oportunidade.estado.toUpperCase().includes(busca) 
+                        || oportunidade.unidade.toUpperCase().includes(busca)
+                        || oportunidade.descricao.toUpperCase().includes(busca);
+            })
+        }
         res.send(JSON.stringify(filtrado))  
     })
 })
@@ -49,11 +53,13 @@ router.get('/:id', function(req, res){
     oportunidadeRef.orderByKey().equalTo(id).on('value', function(snapshot){
         var resultados = snapshot.val()
         var oportunidade = null
-        var keys = Object.keys(resultados)
-        keys.forEach((key) => {
-            oportunidade = resultados[key]
-            oportunidade.id = key
-        })
+        if(resultados){
+            var keys = Object.keys(resultados)
+            keys.forEach((key) => {
+                oportunidade = resultados[key]
+                oportunidade.id = key
+            })
+        }
         res.send(JSON.stringify(oportunidade))  
     })
 })
