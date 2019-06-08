@@ -15,7 +15,15 @@ router.get('/', function(req, res){
 router.get('/medico/:medico', function(req, res){
     var medico = req.params.medico;
     usuariosRef.orderByChild('medico').equalTo(medico).on('value', function(snapshot){
-        res.send(JSON.stringify(snapshot.val()))
+        var resultados = snapshot.val();
+        var valores = [];
+        var keys = Object.keys(resultados)
+        keys.forEach((key) => {
+            var candidatura = resultados[key]
+            candidatura.id = key
+            valores.push(candidatura)
+        })
+        res.send(JSON.stringify(valores))  
     })
 })
 

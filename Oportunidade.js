@@ -47,12 +47,12 @@ router.get('/busca/:busca', function(req, res){
 router.get('/:id', function(req, res){
     var id = req.params.id;
     usuariosRef.orderByKey().equalTo(id).on('value', function(snapshot){
-        var resultados = snapshot.val();
-        var oportunidade = null;
+        var resultados = snapshot.val()
+        var oportunidade = null
         var keys = Object.keys(resultados)
         keys.forEach((key) => {
-            oportunidade = resultados[key];
-            oportunidade.id = key;
+            oportunidade = resultados[key]
+            oportunidade.id = key
         })
         res.send(JSON.stringify(oportunidade))  
     })
