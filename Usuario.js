@@ -18,6 +18,7 @@ router.post('/', function(req, res){
         tipo: req.body.tipo
     }
     usuariosRef.child(req.body.uid).set(usuario)
+    res.send('Usuario cadastrado')
 })
 
 //Exporta o router para uso em index.js

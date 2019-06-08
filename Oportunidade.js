@@ -67,6 +67,7 @@ router.get('/:id', function(req, res){
 //Salva/Edita oportunidade
 router.post('/', function(req, res){
     oportunidadeRef.push(req.body)
+    res.send('Oportunidade Cadastrada')
 })
 
 //Exporta o router para uso em index.js
