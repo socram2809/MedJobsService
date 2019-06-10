@@ -17,8 +17,13 @@ router.post('/', function(req, res){
         nome: req.body.nome,
         tipo: req.body.tipo
     }
-    usuariosRef.child(req.body.uid).set(usuario)
-    res.send('Usuario cadastrado')
+    usuariosRef.child(req.body.uid).set(usuario, function(error) {
+        if(error) {
+            res.send('Erro ao cadastrar usuario')
+        }else {
+            res.send('Usuário cadastrado')
+        }
+    })
 })
 
 //Exporta o router para uso em index.js

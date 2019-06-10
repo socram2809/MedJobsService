@@ -31,16 +31,26 @@ router.get('/medico/:medico', function(req, res){
 
 //Salva/Edita candidatura
 router.post('/', function(req, res){
-    candidaturaRef.push(req.body)
-    res.send('Candidatura cadastrada')
+    candidaturaRef.push(req.body, function(error) {
+        if(error) {
+            res.send('Erro ao salvar candidatura')
+        }else {
+            res.send('Candidatura cadastrada com sucesso')
+        }
+    })
 })
 
 //Remove candidatura
 router.delete('/:id', function(req, res){
     var candidatura = req.params.id
     var deletarCandidaturaRef = database.ref('/candidatura/' + candidatura)
-    deletarCandidaturaRef.remove()
-    res.send('Candidatura removida')
+    deletarCandidaturaRef.remove(function(error) {
+        if(error) {
+            res.send('Erro ao remover candidatura')
+        }else {
+            res.send('Candidatura removida com sucesso')
+        }
+    })
 })
 
 //Exporta o router para uso em index.js
