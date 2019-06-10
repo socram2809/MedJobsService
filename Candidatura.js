@@ -44,12 +44,10 @@ router.post('/', function(req, res){
 router.delete('/:id', function(req, res){
     var candidatura = req.params.id
     var deletarCandidaturaRef = database.ref('/candidatura/' + candidatura)
-    deletarCandidaturaRef.remove(function(error) {
-        if(error) {
-            res.send(500, JSON.stringify('Erro ao remover candidatura'))
-        }else {
-            res.send(200, JSON.stringify('Candidatura removida com sucesso'))
-        }
+    deletarCandidaturaRef.remove().then(function(){
+        res.send(200, JSON.stringify('Candidatura removida com sucesso'))
+    }).catch(function(error){
+        res.send(500, JSON.stringify('Erro na remoção da candidatura'))
     })
 })
 
