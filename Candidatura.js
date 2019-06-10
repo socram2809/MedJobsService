@@ -6,7 +6,7 @@ const candidaturaRef = database.ref('/candidatura')
 
 //Retorna todas as candidaturas
 router.get('/', function(req, res){
-    candidaturaRef.on('value', function(snapshot){
+    candidaturaRef.once('value', function(snapshot){
         res.send(JSON.stringify(snapshot.val()))  
     })
 })
@@ -14,7 +14,7 @@ router.get('/', function(req, res){
 //Retorna candidaturas de um médico
 router.get('/medico/:medico', function(req, res){
     var medico = req.params.medico;
-    candidaturaRef.orderByChild('medico').equalTo(medico).on('value', function(snapshot){
+    candidaturaRef.orderByChild('medico').equalTo(medico).once('value', function(snapshot){
         var resultados = snapshot.val();
         var valores = [];
         if(resultados){
@@ -38,7 +38,6 @@ router.post('/', function(req, res){
             res.send(200, JSON.stringify('Candidatura cadastrada com sucesso'))
         }
     })
-    return null
 })
 
 //Remove candidatura
@@ -52,7 +51,6 @@ router.delete('/:id', function(req, res){
             res.send(200, JSON.stringify('Candidatura removida com sucesso'))
         }
     })
-    return null
 })
 
 //Exporta o router para uso em index.js

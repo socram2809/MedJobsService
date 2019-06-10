@@ -6,7 +6,7 @@ const oportunidadeRef = database.ref('/oportunidade')
 
 //Retorna todas as oportunidades
 router.get('/', function(req, res){
-    oportunidadeRef.on('value', function(snapshot){
+    oportunidadeRef.once('value', function(snapshot){
         var resultados = snapshot.val();
         var valores = [];
         if(resultados){
@@ -24,7 +24,7 @@ router.get('/', function(req, res){
 //Retorna oportunidades específicas
 router.get('/busca/:busca', function(req, res){
     var busca = req.params.busca.toUpperCase();
-    oportunidadeRef.on('value', function(snapshot){
+    oportunidadeRef.once('value', function(snapshot){
         var resultados = snapshot.val();
         var valores = [];
         var filtrado = [];
@@ -50,7 +50,7 @@ router.get('/busca/:busca', function(req, res){
 //Retorna uma oportunidade
 router.get('/:id', function(req, res){
     var id = req.params.id;
-    oportunidadeRef.orderByKey().equalTo(id).on('value', function(snapshot){
+    oportunidadeRef.orderByKey().equalTo(id).once('value', function(snapshot){
         var resultados = snapshot.val()
         var oportunidade = null
         if(resultados){
@@ -73,7 +73,6 @@ router.post('/', function(req, res){
             res.send(200, JSON.stringify('Oportunidada salva com sucesso'))
         }
     })
-    return null
 })
 
 //Exporta o router para uso em index.js

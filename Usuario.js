@@ -6,7 +6,7 @@ const usuariosRef = database.ref('/usuario')
 
 //Retorna os usuários
 router.get('/', function(req, res){
-    usuariosRef.on('value', function(snapshot){
+    usuariosRef.once('value', function(snapshot){
         res.send(JSON.stringify(snapshot.val()))  
     })
 })
