@@ -19,9 +19,9 @@ router.post('/', function(req, res){
     }
     usuariosRef.child(req.body.uid).set(usuario, function(error) {
         if(error) {
-            res.send('Erro ao cadastrar usuario')
+            res.send(500, 'Erro ao cadastrar usuario')
         }else {
-            res.send('Usuário cadastrado')
+            res.send(200, 'Usuário cadastrado')
         }
     })
 })
