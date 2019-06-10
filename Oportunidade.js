@@ -66,10 +66,12 @@ router.get('/:id', function(req, res){
 
 //Salva/Edita oportunidade
 router.post('/', function(req, res){
-    oportunidadeRef.push(req.body).then(function(){
-        res.send(200, JSON.stringify('Oportunidada salva com sucesso'))
-    }).catch(function(error){
-        res.send(500, JSON.stringify('Erro ao salvar oportunidade'))
+    oportunidadeRef.push(req.body, function(error){
+        if(error){
+            res.send(500, JSON.stringify('Erro ao salvar oportunidade'))
+        }else{
+            res.send(200, JSON.stringify('Oportunidada salva com sucesso'))
+        }
     })
 })
 
