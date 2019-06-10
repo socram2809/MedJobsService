@@ -33,11 +33,9 @@ router.get('/medico/:medico', function(req, res){
 router.post('/', function(req, res){
     candidaturaRef.push(req.body, function(error){
         if(error){
-            res.send(500, JSON.stringify('Erro ao salvar candidatura'))
-            return;
+            return res.send(500, JSON.stringify('Erro ao salvar candidatura'))
         }else {
-            res.send(200, JSON.stringify('Candidatura cadastrada com sucesso'))
-            return;
+            return res.send(200, JSON.stringify('Candidatura cadastrada com sucesso'))
         }
     })
 })
@@ -48,11 +46,9 @@ router.delete('/:id', function(req, res){
     var deletarCandidaturaRef = database.ref('/candidatura/' + candidatura)
     deletarCandidaturaRef.remove(function(error){
         if(error){
-            res.send(500, JSON.stringify('Erro na remoção da candidatura'))
-            return;
+            return res.send(500, JSON.stringify('Erro na remoção da candidatura'))
         }else {
-            res.send(200, JSON.stringify('Candidatura removida com sucesso'))
-            return;
+            return res.send(200, JSON.stringify('Candidatura removida com sucesso'))
         }
     })
 })

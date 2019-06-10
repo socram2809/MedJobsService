@@ -68,11 +68,9 @@ router.get('/:id', function(req, res){
 router.post('/', function(req, res){
     oportunidadeRef.push(req.body, function(error){
         if(error){
-            res.send(500, JSON.stringify('Erro ao salvar oportunidade'))
-            return;
+            return res.send(500, JSON.stringify('Erro ao salvar oportunidade'))
         }else{
-            res.send(200, JSON.stringify('Oportunidada salva com sucesso'))
-            return;
+            return res.send(200, JSON.stringify('Oportunidada salva com sucesso'))
         }
     })
 })
