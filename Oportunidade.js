@@ -72,8 +72,8 @@ router.post('/', function(req, res){
         }else{
             res.send(200, JSON.stringify('Oportunidada salva com sucesso'))
         }
-        return null
     })
+    return null
 })
 
 //Exporta o router para uso em index.js
