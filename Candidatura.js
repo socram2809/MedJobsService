@@ -37,6 +37,7 @@ router.post('/', function(req, res){
         }else {
             res.send(200, JSON.stringify('Candidatura cadastrada com sucesso'))
         }
+        return;
     })
 })
 
@@ -50,6 +51,7 @@ router.delete('/:id', function(req, res){
         }else {
             res.send(200, JSON.stringify('Candidatura removida com sucesso'))
         }
+        return;
     })
 })
 
