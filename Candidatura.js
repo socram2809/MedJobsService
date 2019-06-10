@@ -34,10 +34,11 @@ router.post('/', function(req, res){
     candidaturaRef.push(req.body, function(error){
         if(error){
             res.send(500, JSON.stringify('Erro ao salvar candidatura'))
+            return;
         }else {
             res.send(200, JSON.stringify('Candidatura cadastrada com sucesso'))
+            return;
         }
-        return;
     })
 })
 
@@ -48,10 +49,11 @@ router.delete('/:id', function(req, res){
     deletarCandidaturaRef.remove(function(error){
         if(error){
             res.send(500, JSON.stringify('Erro na remoção da candidatura'))
+            return;
         }else {
             res.send(200, JSON.stringify('Candidatura removida com sucesso'))
+            return;
         }
-        return;
     })
 })
 

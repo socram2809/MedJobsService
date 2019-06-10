@@ -69,10 +69,11 @@ router.post('/', function(req, res){
     oportunidadeRef.push(req.body, function(error){
         if(error){
             res.send(500, JSON.stringify('Erro ao salvar oportunidade'))
+            return;
         }else{
             res.send(200, JSON.stringify('Oportunidada salva com sucesso'))
+            return;
         }
-        return;
     })
 })
 
