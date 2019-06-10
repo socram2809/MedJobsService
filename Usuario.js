@@ -11,6 +11,23 @@ router.get('/', function(req, res){
     })
 })
 
+//Retorna um usuário
+router.get('/:id', function(req, res){
+    var id = req.params.id;
+    usuariosRef.orderByKey().equalTo(id).once('value', function(snapshot){
+        var resultados = snapshot.val()
+        var usuario = null
+        if(resultados){
+            var keys = Object.keys(resultados)
+            keys.forEach((key) => {
+                usuario = resultados[key]
+                usuario.uid = key
+            })
+        }
+        res.send(JSON.stringify(usuario))  
+    })
+})
+
 //Salva/Edita usuário
 router.post('/', function(req, res){
     let usuario = {
