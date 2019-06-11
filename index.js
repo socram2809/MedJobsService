@@ -40,9 +40,9 @@ var habilidade = require('./Habilidade.js');
 app.use('/usuario', usuario);
 app.use('/oportunidade', oportunidade);
 app.use('/candidatura',candidaduta);
-app.use('/formacao', usuario);
-app.use('/experiencia', oportunidade);
-app.use('/habilidade',candidaduta);
+app.use('/formacao', formacao);
+app.use('/experiencia', experiencia);
+app.use('/habilidade', habilidade);
 
 /**
  * Caso seja uma URL inválida, mostra a mensagem definida abaixo
