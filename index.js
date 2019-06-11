@@ -30,6 +30,9 @@ app.use(express.static(path.join(__dirname, 'public')))
 var usuario = require('./Usuario.js');
 var oportunidade = require('./Oportunidade.js');
 var candidaduta = require('./Candidatura.js');
+var formacao = require('./Formacao.js');
+var experiencia = require('./Experiencia.js');
+var habilidade = require('./Habilidade.js');
 
 /**
  * Definição dos routers
@@ -37,7 +40,13 @@ var candidaduta = require('./Candidatura.js');
 app.use('/usuario', usuario);
 app.use('/oportunidade', oportunidade);
 app.use('/candidatura',candidaduta);
+app.use('/formacao', usuario);
+app.use('/experiencia', oportunidade);
+app.use('/habilidade',candidaduta);
 
+/**
+ * Caso seja uma URL inválida, mostra a mensagem definida abaixo
+ */
 app.get('*', function(req, res){
    res.send('Desculpa, essa não é uma URL válida.');
 })
