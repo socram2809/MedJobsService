@@ -29,7 +29,7 @@ router.get('/medico/:medico', function(req, res){
     })
 })
 
-//Salva/Edita formacao
+//Salva formacao
 router.post('/', function(req, res){
     formacaoRef.push(req.body, function(error){
         if(error){
@@ -49,6 +49,26 @@ router.delete('/:id', function(req, res){
             res.send(500, JSON.stringify('Erro na remoção da formação'))
         }else {
             res.send(200, JSON.stringify('Formação removida com sucesso'))
+        }
+    })
+})
+
+//Edita formação
+router.put('/', function(req, res){
+    var formacao = req.body
+    var dadosFormacao = {
+        curso: formacao.curso,
+        escolaridade: formacao.escolaridade,
+        fim: formacao.fim,
+        inicio: formacao.inicio,
+        instituicao: formacao.instituicao,
+        medico: formacao.medico
+    }
+    formacaoRef.child(formacao.id).set(dadosFormacao, function(error){
+        if(error){
+            res.send(500, JSON.stringify('Erro ao editar formação'))
+        }else {
+            res.send(200, JSON.stringify('Formação editada com sucesso'))
         }
     })
 })
