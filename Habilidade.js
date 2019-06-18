@@ -29,7 +29,7 @@ router.get('/medico/:medico', function(req, res){
     })
 })
 
-//Salva/Edita habilidade
+//Salva habilidade
 router.post('/', function(req, res){
     habilidadeRef.push(req.body, function(error){
         if(error){
@@ -49,6 +49,22 @@ router.delete('/:id', function(req, res){
             res.send(500, JSON.stringify('Erro na remoção da habilidade'))
         }else {
             res.send(200, JSON.stringify('Habilidade removida com sucesso'))
+        }
+    })
+})
+
+//Edita habilidade
+router.put('/', function(req, res){
+    var habilidade = req.body
+    var dadosHabilidade = {
+        descricao: habilidade.descricao,
+        medico: habilidade.medico
+    }
+    habilidadeRef.child(habilidade.id).set(dadosHabilidade, function(error){
+        if(error){
+            res.send(500, JSON.stringify('Erro ao editar experiência'))
+        }else {
+            res.send(200, JSON.stringify('Experiência editada com sucesso'))
         }
     })
 })

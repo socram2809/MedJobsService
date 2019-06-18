@@ -29,7 +29,7 @@ router.get('/medico/:medico', function(req, res){
     })
 })
 
-//Salva/Edita experiência
+//Salva experiência
 router.post('/', function(req, res){
     experienciaRef.push(req.body, function(error){
         if(error){
@@ -49,6 +49,24 @@ router.delete('/:id', function(req, res){
             res.send(500, JSON.stringify('Erro na remoção da experiência'))
         }else {
             res.send(200, JSON.stringify('Experiência removida com sucesso'))
+        }
+    })
+})
+
+//Edita experiência
+router.put('/', function(req, res){
+    var experiencia = req.body
+    var dadosExperiencia = {
+        empresa: experiencia.empresa,
+        inicio: experiencia.inicio,
+        fim: experiencia.fim,
+        medico: experiencia.medico
+    }
+    experienciaRef.child(experiencia.id).set(dadosExperiencia, function(error){
+        if(error){
+            res.send(500, JSON.stringify('Erro ao editar experiência'))
+        }else {
+            res.send(200, JSON.stringify('Experiência editada com sucesso'))
         }
     })
 })
