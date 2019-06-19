@@ -64,13 +64,46 @@ router.get('/:id', function(req, res){
     })
 })
 
-//Salva/Edita oportunidade
+//Salva oportunidade
 router.post('/', function(req, res){
     oportunidadeRef.push(req.body, function(error){
         if(error){
             res.send(500, JSON.stringify('Erro ao salvar oportunidade'))
         }else{
             res.send(200, JSON.stringify('Oportunidada salva com sucesso'))
+        }
+    })
+})
+
+//Remove oportunidade
+router.delete('/:id', function(req, res){
+    var oportunidade = req.params.id
+    var deletarOportunidadeRef = database.ref('/oportunidade/' + oportunidade)
+    deletarOportunidadeRef.remove(function(error){
+        if(error){
+            res.send(500, JSON.stringify('Erro na remoção da oportunidade'))
+        }else {
+            res.send(200, JSON.stringify('Oportunidade removida com sucesso'))
+        }
+    })
+})
+
+//Edita oportunidade
+router.put('/', function(req, res){
+    var oportunidade = req.body
+    var dadosOportunidade = {
+        titulo: oportunidade.titulo,
+        descricao: oportunidade.descricao,
+        unidade: oportunidade.unidade,
+        cidade: oportunidade.cidade,
+        estado: oportunidade.estado,
+        contratante: oportunidade.contratante
+    }
+    oportunidadeRef.child(oportunidade.id).set(dadosOportunidade, function(error){
+        if(error){
+            res.send(500, JSON.stringify('Erro ao editar oportunidade'))
+        }else {
+            res.send(200, JSON.stringify('Oportunidade editada com sucesso'))
         }
     })
 })
