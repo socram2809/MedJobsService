@@ -67,7 +67,7 @@ router.get('/:id', function(req, res){
 //Retorna oportunidades de um contratante
 router.get('/contratante/:contratante', function(req, res){
     var contratante = req.params.contratante;
-    formacaoRef.orderByChild('contratante').equalTo(contratante).once('value', function(snapshot){
+    oportunidadeRef.orderByChild('contratante').equalTo(contratante).once('value', function(snapshot){
         var resultados = snapshot.val();
         var valores = [];
         if(resultados){
