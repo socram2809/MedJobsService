@@ -58,7 +58,10 @@ router.delete('/oportunidade/:oportunidade', function(req, res){
     var oportunidade = req.params.oportunidade
     candidaturaRef.orderByChild('oportunidade').equalTo(oportunidade).once('value', function(snapshot){
         snapshot.forEach(function(data) {
-            candidaturaRef.child(data.key()).remove()
+            var registro = data.val()
+            if(registro.oportunidade == oportunidade){
+                candidaturaRef.child(data.key()).remove()
+            } 
         })
     })
 })
