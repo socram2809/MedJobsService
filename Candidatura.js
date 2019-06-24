@@ -67,5 +67,23 @@ router.delete('/oportunidade/:oportunidade', function(req, res){
     })
 })
 
+//Retorna candidaturas de uma oportunidade
+router.get('/oportunidade/:oportunidade', function(req, res){
+    var oportunidade = req.params.oportunidade;
+    candidaturaRef.orderByChild('oportunidade').equalTo(oportunidade).once('value', function(snapshot){
+        var resultados = snapshot.val();
+        var valores = [];
+        if(resultados){
+            var keys = Object.keys(resultados)
+            keys.forEach((key) => {
+                var candidatura = resultados[key]
+                candidatura.id = key
+                valores.push(candidatura)
+            })
+        }
+        res.send(JSON.stringify(valores))  
+    })
+})
+
 //Exporta o router para uso em index.js
 module.exports = router
