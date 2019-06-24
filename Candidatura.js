@@ -53,5 +53,18 @@ router.delete('/:id', function(req, res){
     })
 })
 
+//Remove candidaturas de uma oportunidade
+router.delete('/oportunidade/:oportunidade', function(req, res){
+    var oportunidade = req.params.oportunidade
+    candidaturaRef.orderByChild('oportunidade').equalTo(oportunidade).once('value', function(snapshot){
+        snapshot.forEach(function(data) {
+            var registro = data.val()
+            if(registro.oportunidade == oportunidade){
+                candidaturaRef.child(data.key()).remove()
+            } 
+        })
+    })
+})
+
 //Exporta o router para uso em index.js
 module.exports = router
