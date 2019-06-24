@@ -63,6 +63,7 @@ router.delete('/oportunidade/:oportunidade', function(req, res){
                 candidaturaRef.child(data.key).remove()
             } 
         })
+        res.send(200, JSON.stringify('Candidaturas removidas com sucesso'))
     })
 })
 
