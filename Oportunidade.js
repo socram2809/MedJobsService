@@ -64,6 +64,24 @@ router.get('/:id', function(req, res){
     })
 })
 
+//Retorna oportunidades de um contratante
+router.get('/contratante/:contratante', function(req, res){
+    var contratante = req.params.contratante;
+    formacaoRef.orderByChild('contratante').equalTo(contratante).once('value', function(snapshot){
+        var resultados = snapshot.val();
+        var valores = [];
+        if(resultados){
+            var keys = Object.keys(resultados)
+            keys.forEach((key) => {
+                var oportunidade = resultados[key]
+                oportunidade.id = key
+                valores.push(oportunidade)
+            })
+        }
+        res.send(JSON.stringify(valores))  
+    })
+})
+
 //Salva oportunidade
 router.post('/', function(req, res){
     oportunidadeRef.push(req.body, function(error){
