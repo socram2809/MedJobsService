@@ -29,13 +29,30 @@ router.get('/medico/:medico', function(req, res){
     })
 })
 
-//Salva/Edita candidatura
+//Salva candidatura
 router.post('/', function(req, res){
     candidaturaRef.push(req.body, function(error){
         if(error){
             res.send(500, JSON.stringify('Erro ao salvar candidatura'))
         }else {
             res.send(200, JSON.stringify('Candidatura cadastrada com sucesso'))
+        }
+    })
+})
+
+//Edita candidatura
+router.put('/', function(req, res){
+    var candidatura = req.body
+    var dadosCandidatura = {
+        medico: candidatura.medico,
+        oportunidade: candidatura.oportunidade,
+        aprovado: candidatura.aprovado
+    }
+    candidaturaRef.child(candidatura.id).set(dadosCandidatura, function(error){
+        if(error){
+            res.send(500, JSON.stringify('Erro ao editar candidatura'))
+        }else {
+            res.send(200, JSON.stringify('Candidatura editada com sucesso'))
         }
     })
 })
